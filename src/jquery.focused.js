@@ -3,11 +3,11 @@
   // Create the defaults once
   var pluginName = 'focused',
       defaults = {
-        dataAttr: 'focus',
-        changeSelector: 'select[name=focus]',
+        attr: 'data-focus',
+        changeElement: 'select[name=focus]',
         value: null,
         afterUpdate: function focusAfterUpdate() {
-          $('.focus-wrapper:visible').hide().fadeIn(400);
+          $(this).hide().fadeIn(400);
         },
       };
 
@@ -27,35 +27,42 @@
   // Avoid Plugin.prototype conflicts
   $.extend(Plugin.prototype, {
     init: function focusInit() {
+      console.log('init', this);
       // Place initialization logic here
       // Element and settings are accessible at:
       //   this.element
       //   this.settings
-      var initialValue = $(this.options.changeSelector).val();
+      var initialValue = $(this.options.changeElement).val();
 
       // Handle initial value
       this._update(initialValue);
 
       // Bind event handler to change event
-      $(this.options.changeSelector).change(this.changeHandler);
+      $(this.options.changeElement).change(this._changeHandler.bind(this));
     },
 
     _changeHandler: function focusChangeHandler(e) {
-      var value = e.target.value;
+      this._update(e.target.value);
+    },
 
+    _value: function focusValue(value) {
       // If value option is a function, call it, passing the currently selected value
       if (typeof this.options.value === 'function') {
         value = this.options.value.call(this.element, value);
       }
 
-      // Hide elements with any dataAttr attribute
-      $(this.element).find('[data-' + this.options.dataAttr + ']').hide();
+      return value;
+    },
 
-      // Show elements with specific dataAttr value
-      $(this.element).find('[data-' + this.options.dataAttr + '="' + value + '"]').show();
+    _update: function focusUpdate(value) {
+      // Hide elements with any attr attribute
+      $(this.element).find('[' + this.options.attr + ']').hide();
+
+      // Show elements with specific attr value
+      $(this.element).find('[' + this.options.attr + '="' + this._value(value) + '"]').show();
 
       // Call afterUpdate option, if it's a function
-      if (typeof this.options.transition === 'function') {
+      if (typeof this.options.afterUpdate === 'function') {
         this.options.afterUpdate.call(this.element, this.settings);
       }
     }
@@ -65,9 +72,7 @@
     var args = arguments;
     if (options === undefined || typeof options === 'object') {
       return this.each(function () {
-        if (!$.data(this, 'plugin_' + pluginName)) {
-          $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-        }
+        $.data(this, 'plugin_' + pluginName + '_' + this.count++, new Plugin(this, options));
       });
     } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
       return this.each(function () {
@@ -80,6 +85,11 @@
         }
       });
     }
+  };
+
+  $[pluginName] = function () {
+    var $body = $('body');
+    return $body[pluginName].apply($body, Array.prototype.slice.call(arguments, 0));
   };
 
 })(jQuery, window, document);

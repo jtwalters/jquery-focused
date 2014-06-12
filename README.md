@@ -18,11 +18,11 @@
 
   ```javascript
   $('#content').focused({
-    // dataAttr: The data attribute to use (attribute prefixed with data-)
-    dataAttr: 'focus',
+    // attr: The attribute to use as selector
+    attr: 'data-focus',
 
-    // changeSelector: an element to bind the change event handler to
-    changeSelector: 'select[name=focus]',
+    // changeElement: jQuery object or selector to bind the change event handler to
+    changeElement: 'select[name=focus]',
 
     // value: (optional) function to modify the value before using it
     value: null,
