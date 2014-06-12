@@ -1,0 +1,35 @@
+{
+  "name": "focused",
+  "title": "jQuery Focused",
+  "description": "Simplify pages by focusing in on relevant items. Use values of things, e.g. select elements, to hide irrelevant items.",
+  "keywords": [
+    "jquery",
+    "focused"
+  ],
+  "version": "0.0.1",
+  "author": {
+    "name": "Joel Walters",
+    "email": "jtwalters@gmail.com",
+    "url": "https://github.com/jtwalters"
+  },
+  "maintainers": [
+    {
+      "name": "Joel Walters",
+      "email": "jtwalters@gmail.com",
+      "url": "https://github.com/jtwalters"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://zenorocha.mit-license.org/"
+    }
+  ],
+  "bugs": "https://github.com/jtwalters/jquery-focused/issues",
+  "homepage": "https://github.com/jtwalters/jquery-focused",
+  "docs": "https://github.com/jtwalters/jquery-focused#readme",
+  "download": "https://github.com/jtwalters/jquery-focused/archive/master.zip",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
