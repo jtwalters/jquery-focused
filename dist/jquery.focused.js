@@ -1,5 +1,5 @@
 /*
- *  jQuery Focused - v0.0.1
+ *  jQuery Focused - v0.1.0
  *  Simplify pages by focusing in on relevant items. Use values of things, e.g. select elements, to hide irrelevant items.
  *  https://github.com/jtwalters/jquery-focused
  *
@@ -13,6 +13,7 @@
       defaults = {
         attr: 'data-focus',
         changeElement: 'select[name=focus]',
+        bindChange: true,
         value: null,
         afterUpdate: function focusAfterUpdate() {
           $(this).hide().fadeIn(400);
@@ -45,8 +46,10 @@
       // Handle initial value
       this._update(initialValue);
 
-      // Bind event handler to change event
-      $(this.options.changeElement).change(this._changeHandler.bind(this));
+      if (this.options.bindChange) {
+        // Bind event handler to change event
+        $(this.options.changeElement).change(this._changeHandler.bind(this));
+      }
     },
 
     _changeHandler: function focusChangeHandler(e) {
