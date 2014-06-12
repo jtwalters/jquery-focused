@@ -30,6 +30,6 @@
   "docs": "https://github.com/jtwalters/jquery-focused#readme",
   "download": "https://github.com/jtwalters/jquery-focused/archive/master.zip",
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=1.5"
   }
 }

@@ -6,65 +6,88 @@
  *  Made by Joel Walters
  *  Under MIT License
  */
-// the semi-colon before function invocation is a safety net against concatenated
-// scripts and/or other plugins which may not be closed properly.
-;(function ( $, window, document, undefined ) {
+;(function ($, window, document, undefined) {
 
-		// undefined is used here as the undefined global variable in ECMAScript 3 is
-		// mutable (ie. it can be changed by someone else). undefined isn't really being
-		// passed in so we can ensure the value of it is truly undefined. In ES5, undefined
-		// can no longer be modified.
+  // Create the defaults once
+  var pluginName = 'focused',
+      defaults = {
+        dataAttr: 'focus',
+        changeSelector: 'select[name=focus]',
+        value: null,
+        afterUpdate: function focusAfterUpdate() {
+          $('.focus-wrapper:visible').hide().fadeIn(400);
+        },
+      };
 
-		// window and document are passed through as local variable rather than global
-		// as this (slightly) quickens the resolution process and can be more efficiently
-		// minified (especially when both are regularly referenced in your plugin).
+  // The actual plugin constructor
+  function Plugin (element, options) {
+    this.element = element;
+    // jQuery has an extend method which merges the contents of two or
+    // more objects, storing the result in the first object. The first object
+    // is generally empty as we don't want to alter the default options for
+    // future instances of the plugin
+    this.options = $.extend({}, defaults, options);
+    this._defaults = defaults;
+    this._name = pluginName;
+    this.init();
+  }
 
-		// Create the defaults once
-		var pluginName = "defaultPluginName",
-				defaults = {
-				propertyName: "value"
-		};
+  // Avoid Plugin.prototype conflicts
+  $.extend(Plugin.prototype, {
+    init: function focusInit() {
+      // Place initialization logic here
+      // Element and settings are accessible at:
+      //   this.element
+      //   this.settings
+      var initialValue = $(this.options.changeSelector).val();
 
-		// The actual plugin constructor
-		function Plugin ( element, options ) {
-				this.element = element;
-				// jQuery has an extend method which merges the contents of two or
-				// more objects, storing the result in the first object. The first object
-				// is generally empty as we don't want to alter the default options for
-				// future instances of the plugin
-				this.settings = $.extend( {}, defaults, options );
-				this._defaults = defaults;
-				this._name = pluginName;
-				this.init();
-		}
+      // Handle initial value
+      this._update(initialValue);
 
-		// Avoid Plugin.prototype conflicts
-		$.extend(Plugin.prototype, {
-				init: function () {
-						// Place initialization logic here
-						// You already have access to the DOM element and
-						// the options via the instance, e.g. this.element
-						// and this.settings
-						// you can add more functions like the one below and
-						// call them like so: this.yourOtherFunction(this.element, this.settings).
-						console.log("xD");
-				},
-				yourOtherFunction: function () {
-						// some logic
-				}
-		});
+      // Bind event handler to change event
+      $(this.options.changeSelector).change(this.changeHandler);
+    },
 
-		// A really lightweight plugin wrapper around the constructor,
-		// preventing against multiple instantiations
-		$.fn[ pluginName ] = function ( options ) {
-				this.each(function() {
-						if ( !$.data( this, "plugin_" + pluginName ) ) {
-								$.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
-						}
-				});
+    _changeHandler: function focusChangeHandler(e) {
+      var value = e.target.value;
 
-				// chain jQuery functions
-				return this;
-		};
+      // If value option is a function, call it, passing the currently selected value
+      if (typeof this.options.value === 'function') {
+        value = this.options.value.call(this.element, value);
+      }
 
-})( jQuery, window, document );
+      // Hide elements with any dataAttr attribute
+      $(this.element).find('[data-' + this.options.dataAttr + ']').hide();
+
+      // Show elements with specific dataAttr value
+      $(this.element).find('[data-' + this.options.dataAttr + '="' + value + '"]').show();
+
+      // Call afterUpdate option, if it's a function
+      if (typeof this.options.transition === 'function') {
+        this.options.afterUpdate.call(this.element, this.settings);
+      }
+    }
+  });
+
+  $.fn[pluginName] = function (options) {
+    var args = arguments;
+    if (options === undefined || typeof options === 'object') {
+      return this.each(function () {
+        if (!$.data(this, 'plugin_' + pluginName)) {
+          $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+        }
+      });
+    } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+      return this.each(function () {
+        var instance = $.data(this, 'plugin_' + pluginName);
+        if (instance instanceof Plugin && typeof instance[options] === 'function') {
+          instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+        }
+        if (options === 'destroy') {
+          $.data(this, 'plugin_' + pluginName, null);
+        }
+      });
+    }
+  };
+
+})(jQuery, window, document);
