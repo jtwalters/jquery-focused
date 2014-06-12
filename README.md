@@ -18,16 +18,19 @@
 
   ```javascript
   $('#content').focused({
-    // attr: The attribute to use as selector
+    // attr: {string} attribute to use as selector
     attr: 'data-focus',
 
-    // changeElement: jQuery object or selector to bind the change event handler to
+    // changeElement: {jQuery object or selector} to bind the change event handler to
     changeElement: 'select[name=focus]',
 
-    // value: (optional) function to modify the value before using it
+    // bindChange: {boolean} whether we should update on change event (if false, only updates on initialization)
+    bindChange: true,
+
+    // value: (optional) {function} to modify the value before using it
     value: null,
 
-    // afterUpdate: (optional) function to run after the value has changed
+    // afterUpdate: (optional) {function} to run after the value has changed
     afterUpdate: function focusTransition() {
       $('.focus-wrapper:visible').hide().fadeIn(400)
     }
