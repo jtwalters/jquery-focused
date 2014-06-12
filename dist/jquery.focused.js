@@ -1,6 +1,6 @@
 /*
- *  jQuery Focused - v0.1.0
- *  Simplify pages by focusing in on relevant items. Use values of things, e.g. select elements, to hide irrelevant items.
+ *  jQuery Focused - v0.1.1
+ *  Simplify pages by focusing in on relevant items, based on values of elements (e.g. select, input, textarea).
  *  https://github.com/jtwalters/jquery-focused
  *
  *  Made by Joel Walters
@@ -36,7 +36,6 @@
   // Avoid Plugin.prototype conflicts
   $.extend(Plugin.prototype, {
     init: function focusInit() {
-      console.log('init', this);
       // Place initialization logic here
       // Element and settings are accessible at:
       //   this.element

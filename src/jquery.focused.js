@@ -28,7 +28,6 @@
   // Avoid Plugin.prototype conflicts
   $.extend(Plugin.prototype, {
     init: function focusInit() {
-      console.log('init', this);
       // Place initialization logic here
       // Element and settings are accessible at:
       //   this.element

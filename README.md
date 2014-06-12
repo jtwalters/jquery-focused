@@ -43,4 +43,4 @@ Check [CONTRIBUTING.md](https://github.com/jquery-boilerplate/boilerplate/blob/m
 
 ## License
 
-[MIT License](http://joelwalters.mit-license.org/) © Joel Walters
+[MIT License](http://jtwalters.mit-license.org/) © Joel Walters

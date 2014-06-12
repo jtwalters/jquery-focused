@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* jshint node:true, camelcase:false */
 
 module.exports = function(grunt) {
 
@@ -54,6 +54,20 @@ module.exports = function(grunt) {
           interrupt: true,
         },
       },
+    },
+
+    update_json: {
+      // set some task-level options
+      options: {
+        indent: '  ',
+      },
+      // update bower.json
+      bower: {
+        src: 'focused.jquery.json',
+        dest: 'bower.json',
+        // the fields to update, as a String Grouping
+        fields: 'version, description',
+      },
     }
 
   });
@@ -62,8 +76,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-update-json');
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['update_json', 'jshint', 'concat', 'uglify']);
   grunt.registerTask('travis', ['jshint']);
 
 };
