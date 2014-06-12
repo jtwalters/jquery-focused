@@ -28,4 +28,4 @@ Check [CONTRIBUTING.md](https://github.com/jquery-boilerplate/boilerplate/blob/m
 
 ## License
 
-[MIT License](http://zenorocha.mit-license.org/) © Zeno Rocha
+[MIT License](http://joelwalters.mit-license.org/) © Joel Walters
