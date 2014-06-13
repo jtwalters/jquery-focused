@@ -1,8 +1,8 @@
 {
   "name": "jquery-focused",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simplify pages by focusing in on relevant items, based on values of elements (e.g. select, input, textarea).",
-  "homepage": "https://github.com/jtwalters/jquery-focused",
+  "homepage": "http://jtwalters.github.io/jquery-focused/",
   "authors": [
     "Joel Walters <jtwalters@gmail.com>"
   ],

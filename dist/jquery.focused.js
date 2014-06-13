@@ -1,7 +1,7 @@
 /*
- *  jQuery Focused - v0.1.1
+ *  jQuery Focused - v0.1.2
  *  Simplify pages by focusing in on relevant items, based on values of elements (e.g. select, input, textarea).
- *  https://github.com/jtwalters/jquery-focused
+ *  http://jtwalters.github.io/jquery-focused/
  *
  *  Made by Joel Walters
  *  Under MIT License
