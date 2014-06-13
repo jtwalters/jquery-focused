@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jQuery Focused by jtwalters</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">jQuery Focused</h1>
+        <p class="header">Simplify pages by focusing in on relevant items, based on values of elements (e.g. select, input, textarea).</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/jtwalters/jquery-focused/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/jtwalters/jquery-focused/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/jtwalters/jquery-focused">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/jtwalters">jtwalters</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="jquery-focused" class="anchor" href="#jquery-focused"><span class="octicon octicon-link"></span></a>jQuery Focused</h1>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ol>
+<li>
+<p>Include jQuery:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</li>
+<li>
+<p>Include plugin's code:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/jquery.focused.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</li>
+<li>
+<p>Call the plugin:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">focused</span><span class="p">({</span>
+  <span class="c1">// attr: {string} attribute to use as selector</span>
+  <span class="nx">attr</span><span class="o">:</span> <span class="s1">'data-focus'</span><span class="p">,</span>
+
+  <span class="c1">// changeElement: {jQuery object or selector} to bind the change event handler to</span>
+  <span class="nx">changeElement</span><span class="o">:</span> <span class="s1">'select[name=focus]'</span><span class="p">,</span>
+
+  <span class="c1">// bindChange: {boolean} whether we should update on change event (if false, only updates on initialization)</span>
+  <span class="nx">bindChange</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+  <span class="c1">// value: (optional) {function} to modify the value before using it</span>
+  <span class="nx">value</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+  <span class="c1">// afterUpdate: (optional) {function} to run after the value has changed</span>
+  <span class="nx">afterUpdate</span><span class="o">:</span> <span class="kd">function</span> <span class="nx">focusTransition</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'.focus-wrapper:visible'</span><span class="p">).</span><span class="nx">hide</span><span class="p">().</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</li>
+</ol><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Check <a href="https://github.com/jquery-boilerplate/boilerplate/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for more information.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="http://jtwalters.mit-license.org/">MIT License</a> © Joel Walters</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
